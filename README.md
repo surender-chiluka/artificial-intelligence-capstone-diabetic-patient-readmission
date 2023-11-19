@@ -319,7 +319,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
 						<li>Accuracy is around 55% to 70% </li>
 						<li>Recall is around 35% to 60% </li>
 						<li>Precision is around 13% to 14% </li>
-                        <li> LR when not including non-insulan medications and Diagnosis performed better
+                        <li> LogisticRegression when not including non-insulan medications and Diagnosis performed better
                     </ul>
 				</li>
 				<li> At 50% Probability threshold
@@ -327,7 +327,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
 						<li>Accuracy is around 55% to 70% </li>
 						<li>Recall is around 30% to 55% </li>
 						<li>Precision is around 13% to 14% </li>
-                        <li> LR when not including non-insulan medications and Diagnosis performed better
+                        <li> LogisticRegression when not including non-insulan medications and Diagnosis performed better
 					</ul>
 				</li>
 				<li>Generation of data for oversampling had impact on the model performance
