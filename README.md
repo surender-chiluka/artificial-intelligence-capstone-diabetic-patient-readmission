@@ -1,3 +1,7 @@
+[Jupyter Notebook without oversampling](artificial-intelligence-capstone-diabetic-patient-readmission.ipynb)
+
+[Jupyter Notebook with oversampling](artificial-intelligence-capstone-diabetic-patient-readmission-oversampled.ipynb)
+
 <B><H1>Capstone project </H1></B>
 Professional Certificate in Machine Learning and Artificial Intelligence - May 2023 offered via emeritus.org
 <B><H1>Business Objective</H1></B>
@@ -272,7 +276,8 @@ Identify the probability that a diabetic patient will be readmitted with in less
     <ul>
 <li><B>Technical without Oversamling</B>
             <ul>
-				<li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
+		<li><a href="artificial-intelligence-capstone-diabetic-patient-readmission.ipynb">Jupiter Notebook</a></li>		
+		    <li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
 				<li>4 patterns of data was used for modeling using medication and primary diagnostic code
 					<ul>
 						<li>All medication data and primary diagnosis code was included</li>
@@ -304,7 +309,8 @@ Identify the probability that a diabetic patient will be readmitted with in less
         </li>
 	    <li><B>Technical with Oversampling</B>
             <ul>
-				<li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
+		<li><a href="artificial-intelligence-capstone-diabetic-patient-readmission-oversampling.ipynb">Jupiter Notebook</a></li>		
+		    <li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
 		    		<li>SMOTENC at random state 24 used for oversamplling</li>
 				<li>4 patterns of data was used for modeling using medication and primary diagnostic code
 					<ul>
