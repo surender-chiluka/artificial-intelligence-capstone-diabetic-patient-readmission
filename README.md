@@ -276,7 +276,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
     <ul>
 <li><B>Technical without Oversamling</B>
             <ul>
-		<li><a href="https://www.w3schools.com">Diabetic patients readmission for 1999 – 2008</a> available at UC Irvine Machine Learning Repository</li>		
+		<li><a href="artificial-intelligence-capstone-diabetic-patient-readmission.ipynb">Jupiter Notebook</a></li>		
 		    <li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
 				<li>4 patterns of data was used for modeling using medication and primary diagnostic code
 					<ul>
