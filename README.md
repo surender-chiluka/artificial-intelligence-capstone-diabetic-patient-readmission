@@ -27,7 +27,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
     </ul>
 </div>
 <div class="alert alert-block alert-success">
-    <B><H2>Data Analysis</H2></B>
+    <B><H2>Data Analysis and Preparation</H2></B>
     <ul>
         <li><B>Features that will not have any data modifications or cleaning</B>
             <ul>
@@ -46,7 +46,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
                 <li>Number of Days between Admission and Discharge (time_in_hospital)
                   <ul>
                     <li>Data is for patients in the hospital up to 14 days</li>
-                    <li>3 days is highest closelly follwed by 2 day. After 3 days, the numbers dropped   </li>
+                    <li>3 days is highest closely followed by 2 day. After 3 days, the numbers dropped   </li>
                     <li>Only 10% of the data for 8 day or more</li>
                   </ul>
                 </li>
@@ -64,66 +64,159 @@ Identify the probability that a diabetic patient will be readmitted with in less
                 <li>Unique Patient Id(patient_nbr)  : We are modeling based on encounter and not based on individual patient</li>
                 <li>Patient Weight (weight)
                   <ul>
-                    <li>97% values are ? meaning its not avaiable or not recorded</li>
+                    <li>97% values are ? meaning its not available or not recorded</li>
                     <li>Thus decided not to use</li>
                   </ul>
                 <li>Secondary diagnosis codes (diag_2, diag_3)
                   <ul>
-                    <li>First 3 digits of secoundary diagnosis ICD9 codes</li>
+                    <li>First 3 digits of secondary diagnosis ICD9 codes</li>
                     <li>diag_2 have 923 unique values</li>
                     <li>diag_3 have 954 unique values</li>
                     <li>Because of the number of unique values decided to drop</li>
-                    <li>Also priary diagnosie code is also avaiable</li>
+                    <li>Also primary diagnose code is also available</li>
                   </ul>
                 <li>Admitting Physician specialty (medical_specialty)
                   <ul>
                     <li>72 Unique values</li>
                     <li>50% is ? (looks like ? is used for null)</li>
                     <li>4 values are almost 35%</li>
-                    <li>Considered to shrink to the top few values and all remaning set to other</li>
-                    <li>Becasue of the % of missing data, decided to drop</li>
+                    <li>Considered to shrink to the top few values and all renaming set to other</li>
+                    <li>Because of the % of missing data, decided to drop</li>
                   </ul>
                 <li>Max Glucose Serum Test results (max_glu_serum)
                   <ul>
-                    <li>Not avaiable for 95% </li>
-                    <li>Becasue of the % of missing data, decided to drop</li>
+                    <li>Not available for 95% </li>
+                    <li>Because of the % of missing data, decided to drop</li>
                   </ul>
               <li>Unique 23 Payer Codes (payer_code)
                   <ul>
-                    <li>Not avaiable for 95% </li>
+                    <li>Not available for 95% </li>
                     <li>40% missing data</li>
-                    <li>30% is of one provdier code MC (Probably Medicare)</li>
-                    <li>Becasuse of missing data and only one other code used so much, decided to droped thie feature</li>
+                    <li>30% is of one provider code MC (Probably Medicare)</li>
+                    <li>Because of missing data and only one other code used so much, decided to dropped the feature</li>
                   </ul>
+              </li>
+                <li>Patient admission info (admission_source_id)
+                    <ul>
+                        <li>26% Physician Referral</li>
+                        <li>50% Emergency</li>
+                        <li>Updated to have 3 different values - Emergency, Physician referral, Other</li>
+				        <li>Dropped as it seemed to closely correlated to Type of Admission</li>
+                    </ul>
+                 </li>
             </ul>
         </li>
         <li><B>Drop outlier patient records</B>
             <ul>
-                <li>Admission Type Id(admission_type_id): Drop new born patients</li>
-                <li>Number of diagnoses(number_diagnoses): Drop patient records with 1 or above 9 number of diagnoses</li>
-                <li>Number of Lab procedures (num_lab_procedures): Drop patient with more than 98 procedures</li>
-                <li>Patient Gender (gender): Drop patient with Unknown/Invalid race</li>
-                <li>Patient Age (age): Drop patient under 10 years</li>
+                <li>Admission Type Id(admission_type_id) 
+                  <ul>
+                      <li>8 different values </li>
+                      <li>4 - Newborn, there are only 10 records, we will drop this from the data set for modeling </li>
+                      <li>7 - Trauma Center, there are only 21 records, we will drop this from the data set for modeling </li>
+                      <li>5 - Not Available, 6 - NULL, 8 - Not Mapped: Indicates value are not available </li>
+                      <li>The above 3 are close to 10%, so we cannot simply drop them </li>
+                      <li>With dropping and re-categorizing, we will have 4 values for this feature</li>
+                  </ul>
+                </li>
+                <li>Number of diagnoses(number_diagnoses): Drop patient records with 1 or above 9 number of diagnoses
+                    <ul>
+                        <li>50% of patients have 9 Diagnoses entered in to the system</li>
+				        <li>Number of Diagnoses below 2 and above 9 looks outliers and these records are dropped</li>
+                    </ul>
+                </li>
+                <li>Number of Lab procedures (num_lab_procedures)
+                    <ul>
+                        <li>Patients have at least 1 procedure done</li>
+                        <li>Most patients seems to have got around 45 lab procedures</li>
+                        <li>Procedures over 98 seems outliers and those records will be dropped</li>
+                    </ul>
+                </li>
+                <li>Patient Gender (gender)
+                    <ul>
+                         <li>54% are Female</li>
+                         <li>46% are Male</li>
+                        <li>Only 3 records with Unknown/Invalid value for gender and thus dropped</li>
+                    </ul>
+                </li>
+                <li>Patient Age (age)
+                    <ul>
+                        <li>Not an exact age but range of 10 year</li>
+                        <li>Close to 85% are above 50 years</li>
+                        <li>40 and below are close to 5%</li>
+                        <li>0 to 40 years is grouped as 30 to 40</li>
+                        <li>Will be converted to Numerical values from 40 to 100</li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li><B>Feature Value Changes</B>
-             <ul>
-               <li>A1Cresult</li>
-                <li>Patient Race (race): Patient other than African American or Caucasian will be changed to Other</li>
-                <li>Number of medications administered (num_medications): Patients with more than 40 medications are updated to 40 medications</li>
-                 <li>Patient admission info (admission_source_id): Feature compressed to 3 different values - Emergency, Physician referral, Other</li>
-                 <li>Patient discharge info (discharge_disposition_id): Feature compressed to 4 different values - Home, Expired, Referred, Other</li>
-                 <li>Number of Outpatient visits in last 1 year (number_outpatient): Changing from number to visited or not</li>
-                 <li>Number of Inpatient visits in last 1 year (number_inpatient): Changing from number to visited or not</li>
-                 <li>Number of Emergency visits in last 1 year (number_emergency): Changing from number to visited or not</li>
-                 <li>Admission Type Id(admission_type_id): Not Available, NULL, Not Mapped, Trauma Center changed to Other</li>
+            <ul>
+               <li>A1Cresult
+                   <ul>
+                        <li>84% is none - meaning the test values is not available or its not taken</li>
+                        <li>Other 3 are >8, >7 and Normal</li>
+                        <li>Changes this to boolean if test taken or not</li>
+                    </ul>
+               </li>
+                <li>Patient Race (race)
+                    <ul>
+                        <li>75% Caucasian</li>
+                        <li>19% African American</li>
+                        <li>2.2% Not available, 1.5% Other 0.6% Asian, 2% Hispanic - All these are changed to Other</li>
+                    </ul>
+                </li>
+                <li>Number of medications administered (num_medications)
+                    <ul>
+                        <li>Most patients had 20 to 30 medications</li>
+				        <li>IQR indicates over 35 medications might be outliers</li>
+                        <li>Patients with more than 40 medications are updated to 40 medications</li>
+                    </ul>
+                </li>
+                 <li>Patient discharge info (discharge_disposition_id)
+                     <ul>
+                         <li>29 different values</li>
+                         <li>Feature compressed to 4 different values - Home, Expired, Referred, Other</li>
+                     </ul>
+                 </li>
+                 <li>Number of Outpatient visits in last 1 year (number_outpatient): Changing from number to visited or not
+                    <ul>
+                        <li>84% not visited</li>
+                        <li>Changed from number to Outpatient visited or not</li>
+                     </ul>
+                 </li>
+                 <li>Number of Inpatient visits in last 1 year (number_inpatient)
+                     <ul>
+                        <li>66.5% not visited</li>
+                        <li>Changed from number to inpatient visited or
+ not</li>
+                     </ul>
+                 </li>
+                 <li>Number of Emergency visits in last 1 year (number_emergency)
+                        <ul>
+                        <li>89% not visited</li>
+                        <li>Changed from number to inpatient visited or not</li>
+                     </ul>
+                 </li>
                   <li>Medications: 23 medication features are updated to either used or not
                       <ul>
-                          <li>After modelling an further analyisi</li>
-                          
+                          <li>23 medication features indicating if they are used or not</li>
+                          <li>2 medications not used at all - these two features are dropped</li>
+                          <li>Some medications are used less 100 patients - these features also dropped</li>
+                          <li>10 medication features remained</li>
                       </ul>
                  </li>
-
+                  <li>Primary diagnosis
+                      <ul>
+                          <li>Total of 848 values</li>
+                          <li>Using the 3 digit ICD9 code, created a new feature with 17 different values</li>
+                          <li>CIRCULATORY from the new feature is 30%</li>
+                          <li>Categories less than 4% are changed to others</li>
+                          <li>With the updates, this new features has 11 values </li>
+                          <li>Some medications are used less 100 patients - these features also dropped</li>
+                          <li>10 medication features remained</li>
+                          <li>https://en.wikipedia.org/wiki/List_of_ICD-9_codes</li>
+                      </ul>
+                 </li>
             </ul>
         </li>
         <li><B>Classification Feature</B>
