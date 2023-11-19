@@ -1,3 +1,7 @@
+[Jupyter Notebook without oversampling](artificial-intelligence-capstone-diabetic-patient-readmission.ipynb)
+
+[Jupyter Notebook with oversampling](artificial-intelligence-capstone-diabetic-patient-readmission - oversampling.ipynb)
+
 <B><H1>Capstone project </H1></B>
 Professional Certificate in Machine Learning and Artificial Intelligence - May 2023 offered via emeritus.org
 <B><H1>Business Objective</H1></B>
