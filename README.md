@@ -247,24 +247,24 @@ Identify the probability that a diabetic patient will be readmitted with in less
 	</li>
 	<li>KNeighborsClassifier hyper parameters
 	  <ul>
-	 	n_neighbors: 1 to 100 in increments of 1
-		weights: distance, uniform
+	 	<li>n_neighbors: 1 to 100 in increments of 1</li>
+		<li>weights: distance, uniform</li>
  	  </ul>
 	</li>
 	<li>LogisticRegression hyper parameters
 	  <ul>
-	 	max_iter: 500 to 1000 in increments of 50
-		class_weight: None, 'balanced'
+	 	<li>max_iter: 500 to 1000 in increments of 50; 400 to 800 in increments of 50 with oversampled modelling</li>
+		<li>class_weight: None, 'balanced'</li>
  	  </ul>
 	</li>
 	<li>DecisionTreeClassifier hyper parameters
 	  <ul>
-	 	max depth: 5 to 100 in increments of 5
-		min samples split: 2, 4, 6 
-		criterion: gini, entropy, log_loss
-		min samples leaf: 2, 4, 6
-		random state: 15, 20, 42
-		splitter: 'best','random'
+	 	<li>max depth: 5 to 100 in increments of 5; not used with Oversampled modelling</li>
+		<li>min samples split: 2, 4, 6 </li>
+		<li>criterion: gini, entropy, log_loss</li>
+		<li>min samples leaf: 2, 4, 6</li>
+		<li>random state: 15, 20, 42</li>
+		<li>splitter: 'best','random'</li>
  	  </ul>
 	</li>
 	<li>Additional hyper parameters are also used with GridSearch for model evaluation, but decided to use listed above </li>
