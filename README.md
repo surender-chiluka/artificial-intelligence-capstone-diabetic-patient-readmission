@@ -226,4 +226,119 @@ Identify the probability that a diabetic patient will be readmitted with in less
         </li>
     </ul>
 </div>
-   
+<div class="alert alert-block alert-success">
+<B><H2>Modeling</H2></B>
+<ul>
+	<li>One hot encoder is used for categorical features.</li>
+	<li>StandardScaler used for scaling the data</li>
+	<li>GridSearchCV is used to identify the best estimator based on accuracy for each classifier</li>
+	<li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
+	<li>4 patterns of data was used for modeling using medication and primary diagnostic code
+		<ul>
+			<li>All medication data and primary diagnosis code was included</li>
+			<li>Primary diagnosis code was not included</li>
+			<li>Non Insulin medication data was not used</li>
+			<li>Primary diagnosis and Non Insulin medication was not included</li>
+		</ul>
+	</li>
+	<li>KNeighborsClassifier hyper parameters
+	  <ul>
+	 	n_neighbors: 1 to 100 in increments of 1
+		weights: distance, uniform
+ 	  </ul>
+	</li>
+	<li>LogisticRegression hyper parameters
+	  <ul>
+	 	max_iter: 500 to 1000 in increments of 50
+		class_weight: None, 'balanced'
+ 	  </ul>
+	</li>
+	<li>DecisionTreeClassifier hyper parameters
+	  <ul>
+	 	max depth: 5 to 100 in increments of 5
+		min samples split: 2, 4, 6 
+		criterion: gini, entropy, log_loss
+		min samples leaf: 2, 4, 6
+		random state: 15, 20, 42
+		splitter: 'best','random'
+ 	  </ul>
+	</li>
+	<li>Additional hyper parameters are also used with GridSearch for model evaluation, but decided to use listed above </li>
+	<li>Same model evaluations  were also done by Oversampling using SMOTENC </li>
+</ul>
+</div>
+<div class="alert alert-block alert-success">
+<B><H2>Observations</H2></B>
+    <ul>
+        <li><B>Technical </B>
+            <ul>
+				<li>Non of the Modules were able to predict a patient would be able to readmit with the probability of 50% or greater</li>
+				<li>They did reasonably OK at the probability of 13% and above</li>
+				<li>All models have very less Precision score</li>
+				<li> At 13% Probability threshold
+					<ul>
+						<li>Accuracy is around 60% to 70% </li>
+						<li>Recall is around 45% to 65% </li>
+						<li>Precision is around 15% to 17% </li>
+                    </ul>
+				</li>
+				<li> At 20% Probability threshold
+					<ul>
+						<li>Accuracy is around 80% to 85% </li>
+						<li>Recall is around 15% to 20% </li>
+						<li>Precision is around 15% to 17% </li>
+					</ul>
+				</li>
+				<li>Models were evaluated with and without oversampling of the data</li>
+				<li>In general the models preformed the same with and without oversampling</li>
+				<li>Generation of data for oversampling had impact on the model performance
+					<ul>
+						<li>Few models evaluated to good accuracy, recall and precision, around 70+%, 60+% and 50+% respectively</li>
+						<li>Unfortunately the results were not consistent and could not be produced again</li>
+						<li>Used SMOTENC for over sampling but it looks like the sample generated every time is different and thus impacting the modeling
+						</li>
+						<li>Considering saving the over sampled X and y test and training when using oversampling after evaluation. This could help in rerun and get the same best model and its performance.
+					</ul>
+				</li>
+            </ul>
+        </li>
+        <li><B>Business </B>
+            <ul>
+				<li>ROI is an important factor for business</li>
+                <li>ROI out weighs accuracy/precision/recall technical components</li>
+				<li>ROI could be determined as
+					<ul>
+						<li>The cost of individual intervention</li>
+						<li>The cost and non cost benefits on helping a patient not needing to readmit again in less than 30 days</li>
+                        <li>The success rate of the intervention program</li>
+                        <li>A non financial ROI such as improving a business image</li>
+                    </ul>
+                </li>
+                <li>Looking the above ROI impact components 
+                    <ul>
+                        <li>A low intervention cost
+                            <ul>
+                                <li>Could enable business use a low probability threshold</li>
+                                <li>There by helping more patients avoid readmission even at the additional cost of unnecessary interventions</li>
+                            </ul>
+                        </li>
+                        <li>A high intervention cost
+                            <ul>
+                                <li>Could enable business use a high probability threshold</li>
+                                <li>This means they are helping less patients</li>
+                                <li>But if an insurance company can take steps and help even small number of patients, it could still be huge cost saving for them.
+                            </ul>
+                        </li>
+                        <li>Bottom line
+                            <ul>
+                                <li>The cost of intervention and its success rate will be deciding factors</li>
+                                <li>A threshold and the data pattern can be decided which would maximize the business financial and non financial ROI</li>
+                                <li> This is a limited data we used for modeling, an good ROI when using models with limited data could encourage business invest more in gathering more data in pursuit of better ROI.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>   
