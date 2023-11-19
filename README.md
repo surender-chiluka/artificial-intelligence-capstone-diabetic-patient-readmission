@@ -270,8 +270,17 @@ Identify the probability that a diabetic patient will be readmitted with in less
 <div class="alert alert-block alert-success">
 <B><H2>Observations</H2></B>
     <ul>
-        <li><B>Technical </B>
+<li><B>Technical without Oversamling</B>
             <ul>
+				<li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
+				<li>4 patterns of data was used for modeling using medication and primary diagnostic code
+					<ul>
+						<li>All medication data and primary diagnosis code was included</li>
+						<li>Primary diagnosis code was not included</li>
+						<li>Non Insulin medication data was not used</li>
+						<li>Primary diagnosis and Non Insulin medication was not included</li>
+					</ul>
+				</li>
 				<li>Non of the Modules were able to predict a patient would be able to readmit with the probability of 50% or greater</li>
 				<li>They did reasonably OK at the probability of 13% and above</li>
 				<li>All models have very less Precision score</li>
@@ -280,6 +289,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
 						<li>Accuracy is around 60% to 70% </li>
 						<li>Recall is around 45% to 65% </li>
 						<li>Precision is around 15% to 17% </li>
+                        <li>DecisionTreeClassifier with our Diagnosis performed better than others</li>
                     </ul>
 				</li>
 				<li> At 20% Probability threshold
@@ -287,17 +297,42 @@ Identify the probability that a diabetic patient will be readmitted with in less
 						<li>Accuracy is around 80% to 85% </li>
 						<li>Recall is around 15% to 20% </li>
 						<li>Precision is around 15% to 17% </li>
+                        <li>DecisionTreeClassifier witt all medications and diagnosis better than others</li>
 					</ul>
 				</li>
-				<li>Models were evaluated with and without oversampling of the data</li>
-				<li>In general the models preformed the same with and without oversampling</li>
+            </ul>
+        </li>
+	    <li><B>Technical with Oversampling</B>
+            <ul>
+				<li>KNeighborsClassifier, LogisticRegression and DecisionTreeClassifier are used for modeling.</li>
+		    		<li>SMOTENC at random state 24 used for oversamplling</li>
+				<li>4 patterns of data was used for modeling using medication and primary diagnostic code
+					<ul>
+						<li>All medication data and primary diagnosis code was included</li>
+						<li>Primary diagnosis code was not included</li>
+						<li>Non Insulin medication data was not used</li>
+						<li>Primary diagnosis and Non Insulin medication was not included</li>
+					</ul>
+				</li>
+				<li> At 35% Probability threshold
+					<ul>
+						<li>Accuracy is around 55% to 70% </li>
+						<li>Recall is around 35% to 60% </li>
+						<li>Precision is around 13% to 14% </li>
+                        <li> LR when not including non-insulan medications and Diagnosis performed better
+                    </ul>
+				</li>
+				<li> At 50% Probability threshold
+					<ul>
+						<li>Accuracy is around 55% to 70% </li>
+						<li>Recall is around 30% to 55% </li>
+						<li>Precision is around 13% to 14% </li>
+                        <li> LR when not including non-insulan medications and Diagnosis performed better
+					</ul>
+				</li>
 				<li>Generation of data for oversampling had impact on the model performance
 					<ul>
 						<li>Few models evaluated to good accuracy, recall and precision, around 70+%, 60+% and 50+% respectively</li>
-						<li>Unfortunately the results were not consistent and could not be produced again</li>
-						<li>Used SMOTENC for over sampling but it looks like the sample generated every time is different and thus impacting the modeling
-						</li>
-						<li>Considering saving the over sampled X and y test and training when using oversampling after evaluation. This could help in rerun and get the same best model and its performance.
 					</ul>
 				</li>
             </ul>
