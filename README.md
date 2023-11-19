@@ -305,6 +305,7 @@ Identify the probability that a diabetic patient will be readmitted with in less
                         <li>DecisionTreeClassifier witt all medications and diagnosis better than others</li>
 					</ul>
 				</li>
+		    <li><img src="images/Results_NoOversampling.png" alt="With Oversampling Results"></li>
             </ul>
         </li>
 	    <li><B>Technical with Oversampling</B>
@@ -336,17 +337,12 @@ Identify the probability that a diabetic patient will be readmitted with in less
                         <li> LogisticRegression when not including non-insulan medications and Diagnosis performed better
 					</ul>
 				</li>
-				<li>Generation of data for oversampling had impact on the model performance
-					<ul>
-						<li>Few models evaluated to good accuracy, recall and precision, around 70+%, 60+% and 50+% respectively</li>
-					</ul>
-				</li>
+		    <li><img src="images/Results_WithOversampling.png" alt="With Oversampling Results"></li>
             </ul>
         </li>
         <li><B>Business </B>
             <ul>
 				<li>ROI is an important factor for business</li>
-                <li>ROI out weighs accuracy/precision/recall technical components</li>
 				<li>ROI could be determined as
 					<ul>
 						<li>The cost of individual intervention</li>
